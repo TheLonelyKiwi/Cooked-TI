@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] private float _movementSpeed;
+    [SerializeField] private float _acceleration;
     [SerializeField] private float _rotateSpeed;
 
     private Rigidbody _rigidbody;
@@ -18,7 +19,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate() {
-        _rigidbody.velocity = _currentInput * _movementSpeed;
+        Vector3 targetVelocity = _currentInput * _movementSpeed;
+        Vector3 newVelocity = Vector3.Lerp(_rigidbody.velocity, targetVelocity, 1 - Mathf.Exp(-_acceleration * Time.fixedDeltaTime));
+        _rigidbody.velocity = newVelocity;
 
         if (Vector3.Magnitude(_currentInput) > 0) {
             Quaternion targetRotation = Quaternion.LookRotation(_currentInput);
