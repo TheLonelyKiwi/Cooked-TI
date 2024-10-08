@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using JUtils;
 using UnityEngine;
 
@@ -21,6 +22,10 @@ public abstract class BasePlayerState : State
         if (canMove) {
             player.input.onMovePressed += HandleMovePressed;
         }
+
+        if (canInteract) {
+            player.input.onInteractPressed += HandleInteractPressed;
+        }
     }
 
     protected override void OnDeactivate()
@@ -29,10 +34,21 @@ public abstract class BasePlayerState : State
             player.input.onMovePressed -= HandleMovePressed;
             player.movement.SetInput(Vector2.zero);
         }
+
+        if (canInteract) {
+            player.input.onInteractPressed -= HandleInteractPressed;
+        }
     }
 
     private void HandleMovePressed(Vector2 input)
     {
         player.movement.SetInput(input);
+    }
+
+    private void HandleInteractPressed()
+    {
+        Interactable interactable = player.interactor.GetBestInteractable();
+        if (interactable == null) return;
+        stateMachine.GoToState<PlayerPreInteractState>(new StateData(interactable));
     }
 }

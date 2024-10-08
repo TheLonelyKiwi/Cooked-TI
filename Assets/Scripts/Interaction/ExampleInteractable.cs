@@ -1,12 +1,9 @@
 using UnityEngine;
 
-namespace Interaction
+public class ExampleInteractable : Interactable
 {
-    public class ExampleInteractable : Interactable
+    protected override void OnInteract(Player player)
     {
-        public override void OnInteract(Player player)
-        {
-            Debug.Log("Hello!");
-        }
+        Debug.Log("Hello!");
     }
 }
