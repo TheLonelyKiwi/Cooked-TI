@@ -1,3 +1,4 @@
+using JUtils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,18 +10,19 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Transform _visualTransform;
 
-    public bool canMove { get; set; } = false;
-
     private Rigidbody _rigidbody;
     private Vector3 _currentInput;
+
+    public void SetInput(Vector2 input)
+    {
+        _currentInput = input.ToXZVector3();
+    }
 
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody>();
     }
 
     public void FixedUpdate() {
-        if (!canMove) return;
-        
         Vector3 targetVelocity = _currentInput * _movementSpeed;
         Vector3 newVelocity = Vector3.Lerp(_rigidbody.velocity, targetVelocity, 1 - Mathf.Exp(-_acceleration * Time.fixedDeltaTime));
         _rigidbody.velocity = newVelocity;
