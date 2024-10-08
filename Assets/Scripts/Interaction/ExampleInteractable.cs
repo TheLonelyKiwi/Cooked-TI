@@ -4,6 +4,6 @@ public class ExampleInteractable : Interactable
 {
     protected override void OnInteract(Player player)
     {
-        Debug.Log("Hello!");
+        Debug.Log("I am interactable!");
     }
 }

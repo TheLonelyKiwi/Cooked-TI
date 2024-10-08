@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
     [field: SerializeField, Required] public Transform targetTransform { get; private set; }
-    [field: SerializeField] public float _maxPositionOffset = 0.25f;
+    [field: SerializeField] public float maxPositionOffset = 0.25f;
     
     public bool isLocked { get; set; }
 

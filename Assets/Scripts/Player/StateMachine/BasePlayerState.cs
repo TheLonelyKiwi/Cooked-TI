@@ -49,6 +49,6 @@ public abstract class BasePlayerState : State
     {
         Interactable interactable = player.interactor.GetBestInteractable();
         if (interactable == null) return;
-        stateMachine.GoToState<PlayerPreInteractState>(new StateData(interactable));
+        stateMachine.GoToState<PlayerInteractState>(new StateData(interactable));
     }
 }
