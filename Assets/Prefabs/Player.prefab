@@ -397,6 +397,8 @@ MonoBehaviour:
   _movementSpeed: 7
   _acceleration: 20
   _rotateSpeed: 20
+  _animationFrequency: 4
+  _animationAmplitude: 0.5
 --- !u!114 &718025793270105515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,5 +489,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _setEnabledBasedOnActive: 1
   _showLogs: 0
-  _autoActivate: 1
+  _autoActivate: 0
   _autoCreateStates: 1

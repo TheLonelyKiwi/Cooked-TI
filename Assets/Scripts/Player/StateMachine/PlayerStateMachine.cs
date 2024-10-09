@@ -9,11 +9,12 @@ public class PlayerStateMachine : StateMachine
     {
         player = GetComponentInParent<Player>();
         base.Awake();
+        Activate();
     }
 
     protected override void OnActivate()
     {
-        GoToState<DefaultPlayerState>();
+        ContinueQueue(); // Don't ask
     }
 
     protected override void OnDeactivate()

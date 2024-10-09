@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerInput input { get; private set; }
     [field: SerializeField] public PlayerMovement movement { get; private set; }
     [field: SerializeField] public PlayerInteractor interactor { get; private set; }
+    
+    // Warning! Use with care Preferably only in Interactables, the player statemachine & the game state machine.
+    // Do not keep this or the player cached. Otherwise we can have unintended side effects
     [field: SerializeField] public PlayerStateMachine stateMachine { get; private set; }
     [field: SerializeField] public Rigidbody rigidbody { get; private set; }
 

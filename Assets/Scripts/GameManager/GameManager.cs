@@ -8,7 +8,7 @@ public class GameManager : StateMachine
     protected override void OnActivate()
     {
         DontDestroyOnLoad(gameObject);
-        GoToState<PlayerJoinState>();
+        GoToState<GameJoinState>();
     }
 
     protected override void OnDeactivate()
@@ -19,6 +19,6 @@ public class GameManager : StateMachine
 
     protected override void OnNoState()
     {
-        GoToState<PlayerJoinState>();
+        GoToState<GameJoinState>();
     }
 }
