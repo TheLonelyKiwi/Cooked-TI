@@ -18,6 +18,9 @@ public class Player : MonoBehaviour
     [field: SerializeField] public PlayerStateMachine stateMachine { get; private set; }
     [field: SerializeField] public Rigidbody rigidbody { get; private set; }
 
+    public Color color;
+    public string colorName;
+
     private void Reset()
     {
         input = GetComponentInChildren<PlayerInput>();

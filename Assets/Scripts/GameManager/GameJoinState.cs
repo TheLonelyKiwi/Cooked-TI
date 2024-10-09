@@ -16,7 +16,9 @@ public class GameJoinState : State
         foreach (Player player in PlayerManager.instance.players){
             HandlePlayerJoined(player);
         }
-
+        
+        PlayerJoinScreen.instance.Show();
+        
         EventBus.instance.onPlayerJoin += HandlePlayerJoined;
         EventBus.instance.onPlayerLeave += HandlePlayerLeft;
         EventBus.instance.onPlayerReadyChange += HandlePlayerReadyChanged;
@@ -24,6 +26,7 @@ public class GameJoinState : State
 
     protected override void OnDeactivate(){
         PlayerManager.instance.SetJoiningEnabled(false);
+        PlayerJoinScreen.instance.Hide();
         EventBus.instance.onPlayerJoin -= HandlePlayerJoined;
         EventBus.instance.onPlayerLeave -= HandlePlayerLeft;
         EventBus.instance.onPlayerReadyChange -= HandlePlayerReadyChanged;
@@ -42,10 +45,12 @@ public class GameJoinState : State
     private void HandlePlayerJoined(Player player){
         _playerReadyState.Add(player, false);
         player.stateMachine.GoToState<PlayerWaitingState>();
+        PlayerJoinScreen.instance.AddPlayer(player, false);
         StopAllCoroutines();
     }
 
     private void HandlePlayerLeft(Player player){
+        PlayerJoinScreen.instance.RemovePlayer(player);
         _playerReadyState.Remove(player);
     }
 
