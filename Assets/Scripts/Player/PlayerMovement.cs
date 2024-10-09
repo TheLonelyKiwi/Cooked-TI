@@ -34,6 +34,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void Update(){
+        Transform visual = _player.visual;
+        float y = Mathf.Abs(Mathf.Sin(Time.time * Mathf.PI));
+        y = y * 0.5f;
+        visual.localPosition = new Vector3(0, y, 0);
+    }
+
     private void OnMove(InputValue value) {
         Vector2 input = value.Get<Vector2>();
         _currentInput = new Vector3(input.x, 0, input.y);
