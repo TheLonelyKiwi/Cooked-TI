@@ -245,6 +245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187809cd0190b8046b87859eb90b3c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _setEnabledBasedOnActive: 1
+  _showLogs: 0
+  _autoActivate: 1
+  _autoCreateStates: 1
 --- !u!4 &1655689802
 Transform:
   m_ObjectHideFlags: 0
@@ -397,7 +401,7 @@ MonoBehaviour:
   m_NotificationBehavior: 0
   m_MaxPlayerCount: 4
   m_AllowJoining: 0
-  m_JoinBehavior: 0
+  m_JoinBehavior: 1
   m_PlayerJoinedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -405,9 +409,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_JoinAction:
-    m_UseReference: 0
+    m_UseReference: 1
     m_Action:
-      m_Name: 
+      m_Name: Join
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: 8de60d90-b5a9-4564-b762-123ac1fc5d13
@@ -415,7 +419,7 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 5490792656606839903, guid: 898e626876e389c4da1ed75af8fea000, type: 3}
   m_PlayerPrefab: {fileID: 6916434654217495767, guid: fa1937a4eb17f5b4ca61fd9b433d4243, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
