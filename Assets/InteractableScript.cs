@@ -15,6 +15,4 @@ public class InteractableScript : MonoBehaviour
     {
         
     }
-
-    void OnTriggerExit();
 }
