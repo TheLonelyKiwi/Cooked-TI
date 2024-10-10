@@ -9,6 +9,7 @@ public class GamePlayState : State
         SceneManager.LoadScene("Game");
         EventManager.OnTimerStart();
         foreach (Player player in PlayerManager.instance.players) {
+            
             player.stateMachine.GoToState<DefaultPlayerState>();
         }
     }
