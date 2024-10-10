@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    private List<Transform> _spawnPoints;
-    private List<Player> _players;
+    private List<Transform> _spawnPoints = new();
+    private List<Player> _players = new ();
     
     void Start()
     {
