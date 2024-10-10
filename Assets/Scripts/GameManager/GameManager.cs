@@ -5,8 +5,8 @@ using JUtils;
 
 public class GameManager : StateMachine
 {
-
-    private void Start(){
+    protected override void Start(){
+        base.Start();
         EventManager.OnTimerStart();
     }
     protected override void OnActivate()

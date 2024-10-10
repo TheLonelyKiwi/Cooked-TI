@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using JUtils;
 using UnityEngine;
 
 
@@ -16,19 +17,19 @@ public class MachineType : ScriptableObject
         IEnumerable<ItemData> datas = currentItems.Append(itemData);
         List<Recipe> recipes = GetRecipes().ToList();
 
-        Dictionary<ItemData, int> formattedRecipes = new ();
+        Dictionary<ItemData, int> formattedItems = new ();
         foreach (ItemData item in datas) {
-            if (!formattedRecipes.TryGetValue(item, out int count)) {
+            if (!formattedItems.TryGetValue(item, out int count)) {
                 count = 0;
-                formattedRecipes.Add(item, 0);
+                formattedItems.Add(item, 0);
             }
 
-            formattedRecipes[item] = count + 1;
+            formattedItems[item] = count + 1;
         }
 
         List<Recipe> recipesToRemove = new(recipes.Count);
-        foreach ((ItemData key, int value) in formattedRecipes) {
-            foreach (Recipe recipe in recipesToRemove) {
+        foreach ((ItemData key, int value) in formattedItems) {
+            foreach (Recipe recipe in recipes) {
                 bool found = true;
                 foreach (Recipe.RecipeItem recipeInput in recipe.inputs) {
                     if (recipeInput.item == key) continue;
@@ -55,19 +56,19 @@ public class MachineType : ScriptableObject
     {
         List<Recipe> recipes = GetRecipes().ToList();
 
-        Dictionary<ItemData, int> formattedRecipes = new ();
+        Dictionary<ItemData, int> formattedItems = new ();
         foreach (ItemData item in itemDatas) {
-            if (!formattedRecipes.TryGetValue(item, out int count)) {
+            if (!formattedItems.TryGetValue(item, out int count)) {
                 count = 0;
-                formattedRecipes.Add(item, 0);
+                formattedItems.Add(item, 0);
             }
 
-            formattedRecipes[item] = count + 1;
+            formattedItems[item] = count + 1;
         }
 
         List<Recipe> recipesToRemove = new(recipes.Count);
-        foreach ((ItemData key, int value) in formattedRecipes) {
-            foreach (Recipe recipe in recipesToRemove) {
+        foreach ((ItemData key, int value) in formattedItems) {
+            foreach (Recipe recipe in recipes) {
                 bool found = true;
                 foreach (Recipe.RecipeItem recipeInput in recipe.inputs) {
                     if (recipeInput.item == key) continue;

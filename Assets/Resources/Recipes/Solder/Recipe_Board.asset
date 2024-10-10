@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Recipe_Board
   m_EditorClassIdentifier: 
   <machineType>k__BackingField: {fileID: 11400000, guid: 15a2a4077687f234989db005c08ad5e6, type: 2}
+  <productionTime>k__BackingField: 2
   <inputs>k__BackingField:
   - amount: 1
     item: {fileID: 11400000, guid: beaa8198707a11c4ca9fc1dfaa080e7d, type: 2}

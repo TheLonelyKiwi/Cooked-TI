@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Recipe_Boobot
   m_EditorClassIdentifier: 
   <machineType>k__BackingField: {fileID: 11400000, guid: ff01c1cd6c02fea489f53c4d8e6c7b2e, type: 2}
+  <productionTime>k__BackingField: 3
   <inputs>k__BackingField:
   - amount: 1
     item: {fileID: 11400000, guid: 0fd990047bd2c8546af0a33c1354fa1d, type: 2}
