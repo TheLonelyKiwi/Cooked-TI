@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class PlayerStateMachine : StateMachine
 {
-    public PlayerMovement playerMovement { get; private set; }
+    public Player player { get; private set; }
 
     protected override void Awake()
     {
-        playerMovement = GetComponentInParent<PlayerMovement>();
+        player = GetComponentInParent<Player>();
         base.Awake();
+        Activate();
     }
 
     protected override void OnActivate()
     {
-        GoToState<DefaultPlayerState>();
+        ContinueQueue(); // Don't ask
     }
 
     protected override void OnDeactivate()
