@@ -28,7 +28,7 @@ public class TableScript : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         //Debug.Log("this is logging");
         if (other.tag == "Player")
