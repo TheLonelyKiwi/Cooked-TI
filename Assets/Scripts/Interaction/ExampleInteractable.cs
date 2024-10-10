@@ -6,4 +6,5 @@ public class ExampleInteractable : Interactable
     {
         Debug.Log("I am interactable!");
     }
-}
+   
+} 
