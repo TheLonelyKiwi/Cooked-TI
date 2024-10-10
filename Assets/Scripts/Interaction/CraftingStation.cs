@@ -15,7 +15,7 @@ public class CraftingStation : Interactable, IItemDeposit, IItemProvider
         if (CanDepositItem(player.inventory.LastItem())) return true;
         if (player.inventory.IsEmpty() && _machineType.TryGetRecipesForItem(_inventory.items.Select(it => it.itemData), out _)) return true;
         if (CanGrabItem(player.inventory)) return true;
-        return true;
+        return false;
     }
 
     protected override void OnInteract(Player player)

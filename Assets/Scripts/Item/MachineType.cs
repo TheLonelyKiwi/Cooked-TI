@@ -26,30 +26,28 @@ public class MachineType : ScriptableObject
 
             formattedItems[item] = count + 1;
         }
-
-        List<Recipe> recipesToRemove = new(recipes.Count);
-        foreach ((ItemData key, int value) in formattedItems) {
-            foreach (Recipe recipe in recipes) {
-                bool found = true;
-                foreach (Recipe.RecipeItem recipeInput in recipe.inputs) {
-                    if (recipeInput.item == key) continue;
-                    if (recipeInput.amount <= value) continue;
-                    found = false;
+        
+        foreach (Recipe recipe in recipes) {
+            bool valid = true;
+            foreach ((ItemData item, int amount) in formattedItems) {
+                Recipe.RecipeItem recipeItem = recipe.inputs.FirstOrDefault(it => it.item == item);
+                if (recipeItem.item == null) {
+                    valid = false;
                     break;
                 }
 
-                if (!found) {
-                    recipesToRemove.Add(recipe);
+                if (amount > recipeItem.amount) {
+                    valid = false;
+                    break;
                 }
             }
 
-            foreach (Recipe recipe in recipesToRemove) {
-                recipes.Remove(recipe);
-            }
-            recipesToRemove.Clear();
+            if (!valid) continue;
+            
+            return true;
         }
-
-        return recipes.Count > 0;
+        
+        return false;
     }
     
     public bool TryGetRecipesForItem(IEnumerable<ItemData> itemDatas, out Recipe outputRecipe)
@@ -66,34 +64,31 @@ public class MachineType : ScriptableObject
             formattedItems[item] = count + 1;
         }
 
-        List<Recipe> recipesToRemove = new(recipes.Count);
-        foreach ((ItemData key, int value) in formattedItems) {
-            foreach (Recipe recipe in recipes) {
-                bool found = true;
-                foreach (Recipe.RecipeItem recipeInput in recipe.inputs) {
-                    if (recipeInput.item == key) continue;
-                    if (recipeInput.amount == value) continue;
-                    found = false;
-                    break;
-                }
-
-                if (!found) {
-                    recipesToRemove.Add(recipe);
-                }
-            }
-
-            foreach (Recipe recipe in recipesToRemove) {
-                recipes.Remove(recipe);
-            }
-            recipesToRemove.Clear();
-        }
-
-        if (recipes.Count != 1) {
+        if (formattedItems.Count == 0) {
             outputRecipe = null;
             return false;
         }
+        
+        foreach (Recipe recipe in recipes) {
+            bool valid = true;
+            foreach (Recipe.RecipeItem recipeInput in recipe.inputs) {
+                if (!formattedItems.TryGetValue(recipeInput.item, out int providedCount)) {
+                    valid = false;
+                    break;
+                }
+                if (providedCount != recipeInput.amount) {
+                    valid = false;
+                    break;
+                }
+            }
 
-        outputRecipe = recipes[0];
-        return true;
+            if (!valid) continue;
+            
+            outputRecipe = recipe;
+            return true;
+        }
+        
+        outputRecipe = null;
+        return false;
     }
 }
