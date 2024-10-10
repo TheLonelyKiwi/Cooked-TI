@@ -56,7 +56,6 @@ public class GameJoinState : State
 
     private void HandlePlayerReadyChanged(Player player, bool isReady){
         _playerReadyState[player] = isReady;
-        // if (_playerReadyState.Count <= 1) return; // Disabled for testing purposes
         if (!_playerReadyState.All(it => it.Value)) {
             StopAllCoroutines();
             return;
