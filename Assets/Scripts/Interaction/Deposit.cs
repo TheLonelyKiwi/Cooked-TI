@@ -17,11 +17,6 @@ namespace Interaction
             return base.CanInteract(player) && CanDepositItem(player.inventory.LastItem()) && !_isProcessingItem;
         }
 
-        protected override void OnInteract(Player player)
-        {
-            player.stateMachine.GoToState<PlayerPutdownState>(new StateData(this));
-        }
-
         public bool CanDepositItem(Item item)
         {
             return _inventory.IsNotFull() && item != null;
@@ -30,7 +25,6 @@ namespace Interaction
         public Coroutine DepositItem(Item item)
         {
             _inventory.TryAddItem(item, out Coroutine coroutine);
-            coroutine.Then(() => StartCoroutine(DisposeItem(item)));
             return coroutine;
         }
 
@@ -50,6 +44,18 @@ namespace Interaction
             Destroy(item.gameObject);
             
             _isProcessingItem = false;
+        }
+        
+        protected override void OnInteract(Player player)
+        {
+            player.stateMachine.GoToState<PlayerPutdownState>(new StateData(this));
+        }
+
+        private void Awake()
+        {
+            _inventory.onItemAdded += item => {
+                StartCoroutine(DisposeItem(item));
+            };
         }
     }
 }

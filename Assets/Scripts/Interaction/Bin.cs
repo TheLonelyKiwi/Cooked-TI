@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using JUtils;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Interaction
         [SerializeField] private Transform _endTransform;
         
         private bool _isProcessingItem;
-        
+
         public override bool CanInteract(Player player)
         {
             return base.CanInteract(player) && CanDepositItem(player.inventory.LastItem()) && !_isProcessingItem;
@@ -30,7 +31,6 @@ namespace Interaction
         public Coroutine DepositItem(Item item)
         {
             _inventory.TryAddItem(item, out Coroutine coroutine);
-            coroutine.Then(() => StartCoroutine(DisposeItem(item)));
             return coroutine;
         }
 
@@ -50,6 +50,13 @@ namespace Interaction
             Destroy(item.gameObject);
             
             _isProcessingItem = false;
+        }
+        
+        private void Awake()
+        {
+            _inventory.onItemAdded += item => {
+                StartCoroutine(DisposeItem(item));
+            };
         }
     }
 }
