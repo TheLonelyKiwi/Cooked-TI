@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb05024128c34fea9f627fc736caa915, type: 3}
   m_Name: Item_Boobot
   m_EditorClassIdentifier: 
-  <itemModel>k__BackingField: {fileID: 5034028283535145252, guid: a55df1d9e131e674588bfcc4b9de93e3, type: 3}
+  <itemModel>k__BackingField: {fileID: 5693856598644979104, guid: 4ff2e83a8f5353a44aa9ef1c3f1b7aaa, type: 3}

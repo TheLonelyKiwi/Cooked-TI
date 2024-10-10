@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bb05024128c34fea9f627fc736caa915, type: 3}
-  m_Name: Item_CPU
+  m_Name: Item_Chip
   m_EditorClassIdentifier: 
-  <itemModel>k__BackingField: {fileID: 5034028283535145252, guid: a55df1d9e131e674588bfcc4b9de93e3, type: 3}
+  <itemModel>k__BackingField: {fileID: 8077606264951708341, guid: d53dcc2cbf375a14c8f96a323d98e0c3, type: 3}

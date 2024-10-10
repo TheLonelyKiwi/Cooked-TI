@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb05024128c34fea9f627fc736caa915, type: 3}
   m_Name: Item_3D_Filament
   m_EditorClassIdentifier: 
-  <itemModel>k__BackingField: {fileID: 5034028283535145252, guid: a55df1d9e131e674588bfcc4b9de93e3, type: 3}
+  <itemModel>k__BackingField: {fileID: 4583927490742103528, guid: c89dba75b53a3314db6fd4acf4198148, type: 3}

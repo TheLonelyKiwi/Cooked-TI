@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb05024128c34fea9f627fc736caa915, type: 3}
   m_Name: Item_PCB
   m_EditorClassIdentifier: 
-  <itemModel>k__BackingField: {fileID: 5034028283535145252, guid: a55df1d9e131e674588bfcc4b9de93e3, type: 3}
+  <itemModel>k__BackingField: {fileID: 2798742252149039593, guid: fe343fa6576870c47bae64be32805421, type: 3}
