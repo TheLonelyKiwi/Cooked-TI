@@ -30,7 +30,7 @@ public class Table : Interactable, IItemProvider, IItemDeposit
 
     public bool CanDepositItem(Item item)
     {
-        return _inventory.IsNotFull();
+        return _inventory.IsNotFull() && item != null;
     }
 
     public Coroutine GrabItem(Inventory targetInventory)
