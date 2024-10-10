@@ -21,6 +21,7 @@ public abstract class BasePlayerState : State
     {
         if (canMove) {
             player.input.onMovePressed += HandleMovePressed;
+            player.movement.SetInput(player.input.currentMoveInput);
         }
 
         if (canInteract) {

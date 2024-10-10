@@ -22,11 +22,11 @@ public class PlayerInteractor : MonoBehaviour
         float bestScore = -1;
         Interactable bestInteractable = null;
         foreach (Interactable interactable in _interactables) {
-            if (interactable.isLocked) continue;
+            if (!interactable.CanInteract(_player)) continue;
             
             Vector3 interactablePosition = interactable.targetTransform.position;
 
-            float distanceScore = 1 - Mathf.Max((myPosition - interactablePosition).magnitude, 2);
+            float distanceScore = 2 - Mathf.Max((myPosition - interactablePosition).magnitude, 2);
             float finalScore = distanceScore;
             
             if (finalScore < bestScore) continue;
@@ -42,14 +42,15 @@ public class PlayerInteractor : MonoBehaviour
         _player = GetComponentInParent<Player>();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent(out Interactable interactable)) return;
         _interactables.Add(interactable);
     }
 
-    private void LateUpdate()
+    private void OnTriggerExit(Collider other)
     {
-        _interactables.Clear();
+        if (!other.TryGetComponent(out Interactable interactable)) return;
+        _interactables.RemoveAll(it => it == interactable);
     }
 }
