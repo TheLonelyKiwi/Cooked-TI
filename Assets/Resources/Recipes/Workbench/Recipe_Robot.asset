@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c66fa5009394e2d912d59f65ff40349, type: 3}
+  m_Name: Recipe_Robot
+  m_EditorClassIdentifier: 
+  <machineType>k__BackingField: {fileID: 11400000, guid: ff01c1cd6c02fea489f53c4d8e6c7b2e, type: 2}
+  <inputs>k__BackingField:
+  - amount: 1
+    item: {fileID: 11400000, guid: ed94f5cc04fa73d4b91f620a4c564b18, type: 2}
+  - amount: 1
+    item: {fileID: 11400000, guid: 72238ac03db317644b2509fabb313561, type: 2}
+  <output>k__BackingField: {fileID: 11400000, guid: beffb1f884d5f2e44a84ed193cdfd3d4, type: 2}

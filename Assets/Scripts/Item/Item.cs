@@ -26,6 +26,7 @@ public class Item : MonoBehaviour
     private void SetItemData(ItemData itemData)
     {
         this.itemData = itemData;
+        gameObject.name = itemData.name;
         Instantiate(itemData.itemModel, _visualParent);
     }
 
