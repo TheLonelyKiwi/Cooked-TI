@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -16,6 +17,10 @@ public class Inventory : MonoBehaviour
     private Item[] _visualOccupiedMap;
 
     public bool IsFull() => items.Count >= _maxItemCapacity;
+    public bool IsNotFull() => items.Count < _maxItemCapacity;
+    public bool IsEmpty() => items.Count == _maxItemCapacity;
+    public bool HasItems() => items.Count > 0;
+    public Item LastItem() => items.Last();
 
     public bool TryAddItem(Item item, out Coroutine moveRoutine)
     {
@@ -28,7 +33,7 @@ public class Inventory : MonoBehaviour
 
         Transform itemSpot = null;
         for (int i = 0; i < _maxItemCapacity; i++) {
-            if (!_visualOccupiedMap[i]) continue;
+            if (_visualOccupiedMap[i] != null) continue;
             _visualOccupiedMap[i] = item;
             itemSpot = _itemVisuals[i % _itemVisuals.Length];
             break;
@@ -37,6 +42,7 @@ public class Inventory : MonoBehaviour
         item.inventory = this;
         moveRoutine = item.MoveTowards(itemSpot);
         items.Add(item);
+        onItemAdded?.Invoke(item);
         return true;
     }
 
@@ -50,8 +56,10 @@ public class Inventory : MonoBehaviour
             _visualOccupiedMap[i] = null;
             break;
         }
-        
-        return items.Remove(item);
+
+        if (!items.Remove(item)) return false;
+        onItemRemoved?.Invoke(item);
+        return true;
     }
     
     private void Awake()

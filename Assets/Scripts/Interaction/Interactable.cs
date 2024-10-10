@@ -2,7 +2,7 @@ using JUtils;
 using UnityEngine;
 
 
-public abstract class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour, IInteractable
 {
     [field: SerializeField, Required] public Transform targetTransform { get; private set; }
     [field: SerializeField] public float maxPositionOffset = 0.1f;

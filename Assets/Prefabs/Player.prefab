@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxItemCapacity: 1
   _itemVisuals:
-  - {fileID: 3673974350975244469}
+  - {fileID: 4608728002638685019}
 --- !u!1 &3950410292412770903
 GameObject:
   m_ObjectHideFlags: 0

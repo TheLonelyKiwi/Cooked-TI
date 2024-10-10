@@ -42,5 +42,7 @@ public class Item : MonoBehaviour
 
             yield return null;
         }
+
+        transform.parent = targetTransform;
     }
 }
