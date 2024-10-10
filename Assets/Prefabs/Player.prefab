@@ -310,10 +310,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 4
-  _acceleration: 10
+  _acceleration: 13
   _rotateSpeed: 20
   _animationFrequency: 6
-  _animationAmplitude: 0.3
+  _animationAmplitude: 0.2
 --- !u!114 &718025793270105515
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -37,13 +37,11 @@ public class Timer : MonoBehaviour
     private void Update()
     {
         if (!_isRunning) return;
-        if(timerType == TimerType.Countdown && timeToDisplay < 0.0f) return;
-
-
+        if (timerType == TimerType.Countdown && timeToDisplay < 0.0f) {
+            EventBus.instance.onTimerFinished?.Invoke();
+        }
 
         timeToDisplay += timerType == TimerType.Countdown ? -Time.deltaTime : Time.deltaTime;
-
-
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(timeToDisplay);
         string timeText = timeSpan.ToString(format:@"mm\:ss\:ff");

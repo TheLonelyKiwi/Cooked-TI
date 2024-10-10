@@ -10,14 +10,15 @@ public class GameJoinState : State
     private Dictionary<Player, bool> _playerReadyState = new();
     
     protected override void OnActivate() {
+        _playerReadyState.Clear();
         SceneManager.LoadScene("PlayerScene");
         PlayerManager.instance.SetJoiningEnabled(true);
-
+        
+        PlayerJoinScreen.instance.Show();
+        
         foreach (Player player in PlayerManager.instance.players){
             HandlePlayerJoined(player);
         }
-        
-        PlayerJoinScreen.instance.Show();
         
         EventBus.instance.onPlayerJoin += HandlePlayerJoined;
         EventBus.instance.onPlayerLeave += HandlePlayerLeft;
@@ -45,6 +46,7 @@ public class GameJoinState : State
     private void HandlePlayerJoined(Player player){
         _playerReadyState.Add(player, false);
         player.stateMachine.GoToState<PlayerWaitingState>();
+        player.transform.position = Random.insideUnitSphere.With(y: 0) * 3;
         PlayerJoinScreen.instance.AddPlayer(player, false);
         StopAllCoroutines();
     }
