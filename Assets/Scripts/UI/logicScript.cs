@@ -1,9 +1,10 @@
 using System;
+using JUtils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class logicScript : MonoBehaviour
+public class logicScript : SingletonBehaviour<logicScript>
 {
     public int playerScore = 0;
     public int scorePerObject = 10; 
@@ -18,9 +19,9 @@ public class logicScript : MonoBehaviour
     }
 
     [ContextMenu("Increase Score")]
-    public void addScore()
+    public void addScore(int score)
     {
-        playerScore += scorePerObject;
+        playerScore += score;
         scoreText.text = $"{_defaultText} {playerScore}";
     }
 }

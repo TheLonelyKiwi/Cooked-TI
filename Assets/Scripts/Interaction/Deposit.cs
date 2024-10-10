@@ -19,7 +19,7 @@ namespace Interaction
 
         public bool CanDepositItem(Item item)
         {
-            return _inventory.IsNotFull() && item != null;
+            return _inventory.IsNotFull() && item != null && item.itemData.deliverScore > 0;
         }
 
         public Coroutine DepositItem(Item item)
@@ -55,6 +55,7 @@ namespace Interaction
         {
             _inventory.onItemAdded += item => {
                 StartCoroutine(DisposeItem(item));
+                logicScript.instance.addScore(item.itemData.deliverScore);
             };
         }
     }

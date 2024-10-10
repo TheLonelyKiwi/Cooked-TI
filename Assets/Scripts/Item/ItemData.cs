@@ -7,6 +7,7 @@ public class ItemData : ScriptableObject
     public static ItemData[] all { get; private set; }
     
     [field: SerializeField] public GameObject itemModel { get; private set; }
+    [field: SerializeField] public int deliverScore { get; private set; }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void InitializeItems()

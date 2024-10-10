@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Item_Boobot
   m_EditorClassIdentifier: 
   <itemModel>k__BackingField: {fileID: 5693856598644979104, guid: 4ff2e83a8f5353a44aa9ef1c3f1b7aaa, type: 3}
+  <deliverScore>k__BackingField: 10
