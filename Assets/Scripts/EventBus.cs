@@ -10,6 +10,10 @@ public class EventBus : SingletonBehaviour<EventBus>
     public Action<Player> onPlayerLeave;
     public Action<Player, bool> onPlayerReadyChange;
 
+    public Action timerStart;
+    public Action timerStop;
+    public Action<float> timerUpdate;
+
    protected override void Awake(){
     DontDestroyOnLoad(gameObject);
     base.Awake();

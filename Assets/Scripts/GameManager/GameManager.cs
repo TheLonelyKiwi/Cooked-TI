@@ -5,6 +5,10 @@ using JUtils;
 
 public class GameManager : StateMachine
 {
+
+    private void Start(){
+        EventBus.instance.timerStart?.Invoke();
+    }
     protected override void OnActivate()
     {
         DontDestroyOnLoad(gameObject);
