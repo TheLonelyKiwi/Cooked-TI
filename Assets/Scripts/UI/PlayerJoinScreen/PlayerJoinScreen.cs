@@ -1,10 +1,12 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
 public class PlayerJoinScreen : UIScreen<PlayerJoinScreen>
 {
     [SerializeField] private PlayerJoinWidget _playerJoinWidget;
+    [SerializeField] private TMP_Text _timerText;
 
     private Dictionary<Player, PlayerJoinWidget> _widgets = new();
 
@@ -23,10 +25,21 @@ public class PlayerJoinScreen : UIScreen<PlayerJoinScreen>
         Destroy(widget);
         _widgets.Remove(player);
     }
+
+    public void SetTimer(int time)
+    {
+        if (time == -1) {
+            _timerText.gameObject.SetActive(false);
+        } else {
+            _timerText.gameObject.SetActive(true);
+            _timerText.text = time.ToString();
+        }
+    }
     
     protected override void OnShow()
     {
         gameObject.SetActive(true);
+        _timerText.gameObject.SetActive(false);
     }
 
     protected override void OnHide()

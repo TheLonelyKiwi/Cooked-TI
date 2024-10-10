@@ -36,8 +36,8 @@ public class GameJoinState : State
     private IEnumerator StartGameRoutine()
     {
         for (int i = 3; i > 0; i--) {
-            Debug.Log($"Starting in {i} seconds");
-            yield return new WaitForSeconds(1);
+            PlayerJoinScreen.instance.SetTimer(i);
+            yield return new WaitForSeconds(1.5f);
         }
         
         stateMachine.GoToState<GamePlayState>();
@@ -49,6 +49,7 @@ public class GameJoinState : State
         player.transform.position = Random.insideUnitSphere.With(y: 0) * 3;
         PlayerJoinScreen.instance.AddPlayer(player, false);
         StopAllCoroutines();
+        PlayerJoinScreen.instance.SetTimer(-1);
     }
 
     private void HandlePlayerLeft(Player player){
@@ -59,6 +60,7 @@ public class GameJoinState : State
     private void HandlePlayerReadyChanged(Player player, bool isReady){
         _playerReadyState[player] = isReady;
         if (!_playerReadyState.All(it => it.Value)) {
+            PlayerJoinScreen.instance.SetTimer(-1);
             StopAllCoroutines();
             return;
         }

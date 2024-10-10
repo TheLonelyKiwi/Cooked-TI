@@ -339,6 +339,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6323422067446301461, guid: 45664c1cfe9b2474297d5cc5a3984028, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6556053324517463265, guid: 45664c1cfe9b2474297d5cc5a3984028, type: 3}
       propertyPath: m_Name
       value: PlayerJoinScreen
