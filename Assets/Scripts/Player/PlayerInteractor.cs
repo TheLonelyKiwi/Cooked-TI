@@ -19,17 +19,17 @@ public class PlayerInteractor : MonoBehaviour
         Vector3 myPosition = center.position;
         Quaternion rotation = center.rotation; 
         
-        float bestScore = -1;
+        float bestScore = Mathf.Infinity;
         Interactable bestInteractable = null;
         foreach (Interactable interactable in _interactables) {
             if (!interactable.CanInteract(_player)) continue;
             
-            Vector3 interactablePosition = interactable.targetTransform.position;
+            Vector3 interactablePosition = interactable.transform.position;
 
             float distanceScore = 2 - Mathf.Max((myPosition - interactablePosition).magnitude, 2);
             float finalScore = distanceScore;
             
-            if (finalScore < bestScore) continue;
+            if (finalScore > bestScore) continue;
             bestScore = finalScore;
             bestInteractable = interactable;
         }

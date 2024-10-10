@@ -19,24 +19,7 @@ public class PlayerInteractState : BasePlayerState
 
     private IEnumerator WalkToInteractableRoutine(Interactable interactable)
     {
-        Vector3 targetPosition = interactable.targetTransform.position.With(y: player.rigidbody.position.y);
-        Quaternion targetRotation = Quaternion.Euler(interactable.targetTransform.eulerAngles.With(x:0,z:0));
-
-        while (Vector3.Magnitude(player.rigidbody.position - targetPosition) > interactable.maxPositionOffset) {
-            if (!interactable.CanInteract(player)) {
-                stateMachine.ContinueQueue();
-                yield break;
-            }
-
-            Vector3 newPosition = Vector3.Lerp(player.rigidbody.position, targetPosition, 1 - Mathf.Exp(-10 * Time.deltaTime));
-            
-            Quaternion targetRot = Quaternion.LookRotation(newPosition - player.rigidbody.position);
-            Quaternion newRotation = Quaternion.Slerp(player.rotatingTransform.rotation, targetRot, 1 - Mathf.Exp(-20 * Time.deltaTime));
-                
-            player.rigidbody.position = newPosition;
-            player.rotatingTransform.rotation = newRotation;
-            yield return null;
-        }
+        Quaternion targetRotation = Quaternion.LookRotation((interactable.transform.position - player.transform.position).With(y: 0));
 
         while (Quaternion.Angle(targetRotation, player.rotatingTransform.rotation) > 1) {
             if (!interactable.CanInteract(player)) {
