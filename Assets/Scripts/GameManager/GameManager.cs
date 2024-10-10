@@ -7,7 +7,6 @@ public class GameManager : StateMachine
 {
     protected override void Start(){
         base.Start();
-        EventManager.OnTimerStart();
     }
     protected override void OnActivate()
     {

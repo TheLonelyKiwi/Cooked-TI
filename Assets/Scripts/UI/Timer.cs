@@ -4,19 +4,15 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    private TMP_Text _timerText;
     enum TimerType {Countdown, Stopwatch}
     [SerializeField] private TimerType timerType;
-
     [SerializeField] private float timeToDisplay = 60.0f;
+    [SerializeField] private TMP_Text _timerText;
+    
+    private string _originalText;
 
     private bool _isRunning;
-
-    private void Awake(){
-        _timerText = GetComponent<TMP_Text>();
-    }
-  
-
+    
     private void OnEnable(){
         EventManager.TimerStart += EventManagerOnTimerStart;
         EventManager.TimerStop += EventManagerOnTimerStop;
@@ -33,6 +29,10 @@ public class Timer : MonoBehaviour
     private void EventManagerOnTimerStop() => _isRunning = false;
     private void EventManagerOnTimerUpdate(float value) => timeToDisplay += value;
 
+    private void Start()
+    {
+        _originalText = _timerText.text;
+    }
 
     private void Update()
     {
@@ -46,6 +46,7 @@ public class Timer : MonoBehaviour
 
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(timeToDisplay);
-        _timerText.text = timeSpan.ToString(format:@"mm\:ss\:ff");
+        string timeText = timeSpan.ToString(format:@"mm\:ss\:ff");
+        _timerText.text = $"{_originalText} {timeText}";
     }
 }
