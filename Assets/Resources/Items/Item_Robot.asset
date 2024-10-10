@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Item_Robot
   m_EditorClassIdentifier: 
   <itemModel>k__BackingField: {fileID: 5381415987006567950, guid: 64cfa8552093d6240a9c0cd38f2b5ab3, type: 3}
+  <deliverScore>k__BackingField: 30

@@ -8,6 +8,8 @@ public class Printer : Interactable, IItemProvider, IItemDeposit
 {
     [SerializeField, Required] private Inventory _inventory;
     [SerializeField, Required] private ItemData _printItemData;
+    [SerializeField, Required] private Transform _printBed;
+    [SerializeField, Required] private Transform _printHead;
 
     private float targetTime = 0f;
     
@@ -81,13 +83,26 @@ public class Printer : Interactable, IItemProvider, IItemDeposit
 
     private void Update()
     {
-        if (!isPrinting) return;
-        targetTime -= Time.deltaTime;
+        if (isPrinting) {
+            targetTime -= Time.deltaTime;
 
-        if (targetTime <= 0.0f)
-        {
-            EndTimer();
+            if (targetTime <= 0.0f)
+            {
+                EndTimer();
+            }
         }
-    }
 
+        int state = isPrinting ? 1 : 0;
+        float targetBedPosition = Mathf.PerlinNoise(Time.time * 2f, 124.141f) * 2 - 1;
+        float targetHeadPosition = Mathf.PerlinNoise(Time.time * 2f, 513.141f) * 2 - 1;
+
+        float headPos = Mathf.Lerp(0f, targetHeadPosition * 0.2f + 0.055f, state);
+        float bedPos = Mathf.Lerp(0f, targetBedPosition * 0.2f, state);
+
+        float newBedPos = Mathf.Lerp(_printBed.localPosition.x, bedPos, 1 - Mathf.Exp(-5 * Time.deltaTime));
+        float newHeadPos = Mathf.Lerp(_printHead.localPosition.y, headPos, 1 - Mathf.Exp(-5 * Time.deltaTime));
+
+        _printBed.localPosition = new Vector3(newBedPos, 0, 0);
+        _printHead.localPosition = new Vector3(0, newHeadPos, 0);
+    }
 }

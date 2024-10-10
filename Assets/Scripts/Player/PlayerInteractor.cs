@@ -24,9 +24,9 @@ public class PlayerInteractor : MonoBehaviour
         foreach (Interactable interactable in _interactables) {
             if (!interactable.CanInteract(_player)) continue;
             
-            Vector3 interactablePosition = interactable.targetTransform.position;
+            Vector3 interactablePosition = interactable.transform.position;
 
-            float distanceScore = 2 - Mathf.Max((myPosition - interactablePosition).magnitude, 2);
+            float distanceScore = 3 - Mathf.Min((myPosition - interactablePosition).magnitude, 3);
             float finalScore = distanceScore;
             
             if (finalScore < bestScore) continue;
