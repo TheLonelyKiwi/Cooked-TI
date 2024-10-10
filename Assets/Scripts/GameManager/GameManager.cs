@@ -7,7 +7,7 @@ public class GameManager : StateMachine
 {
 
     private void Start(){
-        EventBus.instance.timerStart?.Invoke();
+        EventManager.OnTimerStart();
     }
     protected override void OnActivate()
     {

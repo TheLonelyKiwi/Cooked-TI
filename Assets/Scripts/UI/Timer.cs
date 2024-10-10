@@ -5,7 +5,7 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     private TMP_Text _timerText;
-    enum TimerType {Countdown}
+    enum TimerType {Countdown, Stopwatch}
     [SerializeField] private TimerType timerType;
 
     [SerializeField] private float timeToDisplay = 60.0f;
@@ -18,19 +18,18 @@ public class Timer : MonoBehaviour
   
 
     private void OnEnable(){
-        EventBus.instance.timerStart += EventManagerOnTimerStart;
-        EventBus.instance.timerStop += EventManagerOnTimerStop;
-        EventBus.instance.timerUpdate += EventManagerOnTimerUpdate;
+        EventManager.TimerStart += EventManagerOnTimerStart;
+        EventManager.TimerStop += EventManagerOnTimerStop;
+        EventManager.TimerUpdate += EventManagerOnTimerUpdate;
     }
 
     private void OnDisable(){
-        EventBus.instance.timerStart -= EventManagerOnTimerStart;
-        EventBus.instance.timerStop -= EventManagerOnTimerStop;
-        EventBus.instance.timerUpdate -= EventManagerOnTimerUpdate;
+        EventManager.TimerStart -= EventManagerOnTimerStart;
+        EventManager.TimerStop -= EventManagerOnTimerStop;
+        EventManager.TimerUpdate -= EventManagerOnTimerUpdate;
     }
 
     private void EventManagerOnTimerStart() => _isRunning = true;
-
     private void EventManagerOnTimerStop() => _isRunning = false;
     private void EventManagerOnTimerUpdate(float value) => timeToDisplay += value;
 
