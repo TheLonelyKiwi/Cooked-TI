@@ -5817,6 +5817,7 @@ GameObject:
   - component: {fileID: 558133752}
   - component: {fileID: 558133751}
   - component: {fileID: 558133750}
+  - component: {fileID: 558133753}
   m_Layer: 0
   m_Name: UiManager
   m_TagString: Untagged
@@ -5837,7 +5838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerType: 0
-  timeToDisplay: 60
+  timeToDisplay: 180
   _timerText: {fileID: 1820588065}
 --- !u!114 &558133751
 MonoBehaviour:
@@ -5869,6 +5870,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &558133753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558133749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dc877c5233a8074b82b01e1dc3c867c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &579526828
 PrefabInstance:
   m_ObjectHideFlags: 0
