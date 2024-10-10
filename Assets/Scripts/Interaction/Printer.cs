@@ -14,7 +14,10 @@ public class Printer : Interactable, IItemProvider, IItemDeposit
     bool isPrinting = false;
     public override bool CanInteract(Player player)
     {
-        if(!CanGrabItem(player.inventory) && !CanDepositItem(player.inventory.LastItem()) && !isPrinting) return false;
+        if (!base.CanInteract(player)) return false;
+        if (isPrinting) return false;
+        if (CanGrabItem(player.inventory)) return true;
+        if (CanDepositItem(player.inventory.LastItem())) return true;
         return base.CanInteract(player);
     }
     protected override void OnInteract(Player player)
@@ -51,34 +54,39 @@ public class Printer : Interactable, IItemProvider, IItemDeposit
     {
         _inventory.TryAddItem(item, out Coroutine moveRoutine);
         StartTimer(5.0f);
-        return (moveRoutine);
+        return moveRoutine
+           .Then(() => {
+                while (_inventory.HasItems()) {
+                    Item item = _inventory.LastItem();
+                    _inventory.TryRemoveItem(item);
+                    Destroy(item.gameObject);
+                }
+            });
     }
 
     private void StartTimer(float time)
     {
         targetTime = time;
-        _inventory.TryRemoveItem(_inventory.LastItem());
         isPrinting = true;
     }
 
     private void EndTimer()
     {
+        
         Item printItem = Item.CreateItem(_printItemData);
         printItem.transform.position = transform.position;
         _inventory.TryAddItem(printItem, out Coroutine moveRoutine);
         isPrinting = false;
     }
 
-    void Update()
+    private void Update()
     {
-        if (isPrinting)
-        {
-            targetTime -= Time.deltaTime;
+        if (!isPrinting) return;
+        targetTime -= Time.deltaTime;
 
-            if (targetTime <= 0.0f)
-            {
-                EndTimer();
-            }
+        if (targetTime <= 0.0f)
+        {
+            EndTimer();
         }
     }
 

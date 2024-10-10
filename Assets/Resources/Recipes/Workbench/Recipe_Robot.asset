@@ -18,5 +18,5 @@ MonoBehaviour:
   - amount: 1
     item: {fileID: 11400000, guid: ed94f5cc04fa73d4b91f620a4c564b18, type: 2}
   - amount: 1
-    item: {fileID: 11400000, guid: 72238ac03db317644b2509fabb313561, type: 2}
-  <output>k__BackingField: {fileID: 11400000, guid: beffb1f884d5f2e44a84ed193cdfd3d4, type: 2}
+    item: {fileID: 11400000, guid: beffb1f884d5f2e44a84ed193cdfd3d4, type: 2}
+  <output>k__BackingField: {fileID: 11400000, guid: 72238ac03db317644b2509fabb313561, type: 2}
