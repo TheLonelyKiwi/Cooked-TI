@@ -416,6 +416,8 @@ MonoBehaviour:
   <interactor>k__BackingField: {fileID: 718025793270105515}
   <stateMachine>k__BackingField: {fileID: 3729646694143920275}
   <rigidbody>k__BackingField: {fileID: 2488913835699413392}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  colorName: 
 --- !u!114 &8479814950243572791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,9 +430,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c487bdd03269c4dac53f7cc85b966b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 7
-  _acceleration: 20
+  _movementSpeed: 6
+  _acceleration: 15
   _rotateSpeed: 20
+  _animationFrequency: 6
+  _animationAmplitude: 0.3
 --- !u!114 &718025793270105515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,5 +647,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _setEnabledBasedOnActive: 1
   _showLogs: 0
-  _autoActivate: 1
+  _autoActivate: 0
   _autoCreateStates: 1

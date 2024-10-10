@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SearchService;
+using Vector2 = System.Numerics.Vector2;
 
 
 public class PlayerInteractor : MonoBehaviour
@@ -13,19 +15,26 @@ public class PlayerInteractor : MonoBehaviour
     public Interactable GetBestInteractable(Transform center = null)
     {
         if (center == null) center = _player.rotatingTransform;
+
+        Vector3 myPosition = center.position;
+        Quaternion rotation = center.rotation; 
         
         float bestScore = -1;
-        Interactable interactable = null;
-
-        foreach (Interactable interactable1 in _interactables) {
+        Interactable bestInteractable = null;
+        foreach (Interactable interactable in _interactables) {
+            if (interactable.isLocked) continue;
             
+            Vector3 interactablePosition = interactable.targetTransform.position;
+
+            float distanceScore = 1 - Mathf.Max((myPosition - interactablePosition).magnitude, 2);
+            float finalScore = distanceScore;
+            
+            if (finalScore < bestScore) continue;
+            bestScore = finalScore;
+            bestInteractable = interactable;
         }
 
-        return null;
-    }
-    
-    public void Interact(Interactable interactable)
-    {
+        return bestInteractable;
     }
 
     private void Awake()

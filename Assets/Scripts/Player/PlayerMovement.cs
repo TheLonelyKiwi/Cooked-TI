@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _movementSpeed;
     [SerializeField] private float _acceleration;
     [SerializeField] private float _rotateSpeed;
+    [SerializeField] private float _animationFrequency = 4;
+    [SerializeField] private float _animationAmplitude = 0.5f;
 
     private Player _player;
     private Rigidbody _rigidbody => _player.rigidbody;
@@ -32,6 +34,15 @@ public class PlayerMovement : MonoBehaviour
             Quaternion newRotation = Quaternion.Slerp(_player.rotatingTransform.rotation, targetRotation, 1 - Mathf.Exp(-_rotateSpeed * Time.fixedDeltaTime)) ;   
             _player.rotatingTransform.rotation = newRotation;
         }
+    }
+
+    private void Update(){
+        Transform visual = _player.visual;
+        float movementSpeed = Mathf.Clamp(_rigidbody.velocity.magnitude / _movementSpeed, 0, 1);
+        float y = Mathf.Abs(Mathf.Sin(Time.time * Mathf.PI * _animationFrequency));
+        y = y * _animationAmplitude;
+        y = y * movementSpeed;
+        visual.localPosition = new Vector3(0, y, 0);
     }
 
     private void OnMove(InputValue value) {
