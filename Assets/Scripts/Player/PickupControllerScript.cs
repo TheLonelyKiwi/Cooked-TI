@@ -10,6 +10,7 @@ public class PlayerPickupController : MonoBehaviour
     public float pickupRange; // Range within which the player can pick up items
     public LayerMask pickupLayer;  // Layer mask for detecting items that can be picked up
     private PickupItem currentItem; // Currently held item
+    private PutOnTable PutOnTable;
 
     private bool NearTable;
 
@@ -42,7 +43,7 @@ public class PlayerPickupController : MonoBehaviour
         }
         else
         {
-            Debug.Log("uh oh things went wrong");
+            //Debug.Log("uh oh things went wrong");
         }
     }
 
