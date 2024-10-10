@@ -5,30 +5,22 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private int _maxItemCapacity;
+    [SerializeField] private int _maxItemCapacity = 1;
     [SerializeField] private Transform[] _itemVisuals;
 
     public List<Item> items { get; private set; } = new();
-    public Item[] _visualOccupiedMap;
     
     public event Action<Item> onItemAdded;
     public event Action<Item> onItemRemoved;
+    
+    private Item[] _visualOccupiedMap;
 
-    private void Awake()
+    public bool IsFull() => items.Count >= _maxItemCapacity;
+
+    public bool TryAddItem(Item item, out Coroutine moveRoutine)
     {
-        if (_maxItemCapacity > _itemVisuals.Length) {
-            Debug.LogError($"Inventory for {gameObject} has more capacity than visual spots", this);
-        }
-
-        _visualOccupiedMap = new Item[_maxItemCapacity];
-        for (int i = 0; i < _visualOccupiedMap.Length; i++) {
-            _visualOccupiedMap[i] = true;
-        }
-    }
-
-    public bool TryAddItem(Item item)
-    {
-        if (items.Count >= _maxItemCapacity + 1) return false;
+        moveRoutine = null;
+        if (IsFull()) return false;
         if (item.inventory == this) return false;
         if (item.inventory != null) {
             if (!item.inventory.TryRemoveItem(item)) return false;
@@ -43,7 +35,7 @@ public class Inventory : MonoBehaviour
         }
         
         item.inventory = this;
-        item.MoveTowards(itemSpot);
+        moveRoutine = item.MoveTowards(itemSpot);
         items.Add(item);
         return true;
     }
@@ -60,5 +52,17 @@ public class Inventory : MonoBehaviour
         }
         
         return items.Remove(item);
+    }
+    
+    private void Awake()
+    {
+        if (_maxItemCapacity > _itemVisuals.Length) {
+            Debug.LogError($"Inventory for {gameObject} has more capacity than visual spots", this);
+        }
+
+        _visualOccupiedMap = new Item[_maxItemCapacity];
+        for (int i = 0; i < _visualOccupiedMap.Length; i++) {
+            _visualOccupiedMap[i] = null;
+        }
     }
 }

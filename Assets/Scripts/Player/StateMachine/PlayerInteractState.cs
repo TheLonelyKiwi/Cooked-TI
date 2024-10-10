@@ -23,7 +23,7 @@ public class PlayerInteractState : BasePlayerState
         Quaternion targetRotation = Quaternion.Euler(interactable.targetTransform.eulerAngles.With(x:0,z:0));
 
         while (Vector3.Magnitude(player.rigidbody.position - targetPosition) > interactable.maxPositionOffset) {
-            if (interactable.isLocked) {
+            if (interactable.CanInteract(player)) {
                 stateMachine.ContinueQueue();
                 yield break;
             }
@@ -39,7 +39,7 @@ public class PlayerInteractState : BasePlayerState
         }
 
         while (Quaternion.Angle(targetRotation, player.rotatingTransform.rotation) > 1) {
-            if (interactable.isLocked) {
+            if (interactable.CanInteract(player)) {
                 stateMachine.ContinueQueue();
                 yield break;
             }
@@ -49,7 +49,7 @@ public class PlayerInteractState : BasePlayerState
             yield return null;
         }
         
-        if (interactable.isLocked) {
+        if (interactable.CanInteract(player)) {
             stateMachine.ContinueQueue();
         } else {
             interactable.Interact(player);

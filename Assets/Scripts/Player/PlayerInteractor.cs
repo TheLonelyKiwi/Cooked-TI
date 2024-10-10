@@ -22,7 +22,7 @@ public class PlayerInteractor : MonoBehaviour
         float bestScore = -1;
         Interactable bestInteractable = null;
         foreach (Interactable interactable in _interactables) {
-            if (interactable.isLocked) continue;
+            if (interactable.CanInteract(_player)) continue;
             
             Vector3 interactablePosition = interactable.targetTransform.position;
 
