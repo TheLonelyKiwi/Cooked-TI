@@ -4,23 +4,24 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
-public class PlayerPickupController : MonoBehaviour
+public class GarbageBinScript : MonoBehaviour
 {
     public Transform holdPosition; // Position in front of the player where the item will be held
     public float pickupRange; // Range within which the player can pick up items
     public LayerMask pickupLayer;  // Layer mask for detecting items that can be picked up
     private PickupItem currentItem; // Currently held item
-    public bool NearTable;
+    public bool NearPlayer = false;
+    public GameObject DestroyPlane;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) // Press 'E' to pick up or drop the item
+        if (Input.GetKeyDown(KeyCode.E) && NearPlayer == true) // Press 'E' to pick up or drop the item
         {
             if (currentItem == null)
             {
-                TryPickupItem();
+                TryTablePickupItem();
             }
-            else if (NearTable == true)
+            else
             {
                 DropItem();
             }
@@ -30,27 +31,23 @@ public class PlayerPickupController : MonoBehaviour
     public void OnTriggerStay(Collider other)
     {
         //Debug.Log("this is logging");
-        if (other.tag == "Placeable on")
+        if (other.tag == "Player")
         {
-            NearTable = true;
-            Debug.Log("Neartable has been set to TRUE");
-        }
-        else
-        {
-            Debug.Log("hit something else");
+            NearPlayer = true;
+            Debug.Log("NearPlayer has been set to TRUE");
         }
     }
 
     public void OnTriggerExit()
     {
-        if (NearTable == true)
+        if (NearPlayer == true)
         {
-            NearTable = false;
-            Debug.Log("NearTable has been set to FALSE");
+            NearPlayer = false;
+            Debug.Log("NearPlayer has been set to FALSE");
         }
     }
 
-    void TryPickupItem()
+    void TryTablePickupItem()
     {
         Collider[] itemsInRange = Physics.OverlapSphere(transform.position, pickupRange, pickupLayer);
 
@@ -61,7 +58,8 @@ public class PlayerPickupController : MonoBehaviour
             if (item != null)
             {
                 currentItem = item;
-                currentItem.PickUp(holdPosition); // Pick up the item and attach it to the hold position
+                currentItem.TablePickUp(holdPosition); // Pick up the item and attach it to the hold position
+                DropItem();
             }
         }
     }
@@ -69,7 +67,7 @@ public class PlayerPickupController : MonoBehaviour
     {
         if (currentItem != null)
         {
-            currentItem.Drop(); // Drop the currently held item
+            currentItem.Drop(); // Pick up the item and attach it to the hold position
             currentItem = null;
         }
     }
