@@ -8,6 +8,9 @@ public class CraftingStation : Interactable, IItemDeposit, IItemProvider
     [Space]
     [SerializeField, Required] private MachineType _machineType;
     [SerializeField, Required] private Inventory _inventory;
+    
+    [field: Space]
+    [field: SerializeField, Required] public ParticleController craftVFX { get; private set;}
 
     public override bool CanInteract(Player player)
     {

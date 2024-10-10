@@ -10,6 +10,22 @@ public class ParticleController : MonoBehaviour
     [SerializeField] private bool _isTrigger = false; 
     private float remainingDuration = 0.0f;
 
+    public void Play()
+    {
+        foreach(ParticleSystem ps in _particleSystems)
+        {
+            ps.Play();
+        }
+    }
+    
+    public void Stop()
+    {
+        foreach(ParticleSystem ps in _particleSystems)
+        {
+            ps.Stop();
+        }
+    }
+
     [Button]
     public void TriggerVFX(float duration = 3.0f)
     {
@@ -30,6 +46,12 @@ public class ParticleController : MonoBehaviour
         }
         
     }
+
+    private void Awake()
+    {
+        Stop();
+    }
+
     private void Update()
     {
         if (remainingDuration > 0 && !_isTrigger)

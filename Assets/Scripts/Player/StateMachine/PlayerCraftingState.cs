@@ -15,12 +15,14 @@ public class PlayerCraftingState : BasePlayerState
         _craftingStation.isLocked = true;
         _recipe = stateData.Get<Recipe>(1);
         _timeLeft = _recipe.productionTime;
+        _craftingStation.craftVFX.Play();
     }
 
     protected override void OnDeactivate()
     {
         base.OnDeactivate();
         _craftingStation.isLocked = false;
+        _craftingStation.craftVFX.Stop();
     }
 
     protected override void ActiveUpdate()
