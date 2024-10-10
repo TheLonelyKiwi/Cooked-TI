@@ -44,7 +44,17 @@ public class Timer : MonoBehaviour
         timeToDisplay += timerType == TimerType.Countdown ? -Time.deltaTime : Time.deltaTime;
 
         TimeSpan timeSpan = TimeSpan.FromSeconds(timeToDisplay);
-        string timeText = timeSpan.ToString(format:@"mm\:ss\:ff");
+
+        string timeText;
+
+        if (timeToDisplay <= 30) {
+            timeText = timeSpan.ToString(format:@"mm\:ss\:ff");
+            _timerText.color = Color.HSVToRGB(0, .8f, 1f);
+        } else {
+            timeText = timeSpan.ToString(format:@"mm\:ss");
+            _timerText.color = Color.white;
+        }
+        
         _timerText.text = $"{_originalText} {timeText}";
     }
 }
