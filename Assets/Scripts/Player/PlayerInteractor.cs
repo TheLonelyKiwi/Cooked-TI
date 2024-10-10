@@ -42,14 +42,15 @@ public class PlayerInteractor : MonoBehaviour
         _player = GetComponentInParent<Player>();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (!other.TryGetComponent(out Interactable interactable)) return;
         _interactables.Add(interactable);
     }
 
-    private void LateUpdate()
+    private void OnTriggerExit(Collider other)
     {
-        _interactables.Clear();
+        if (!other.TryGetComponent(out Interactable interactable)) return;
+        _interactables.RemoveAll(it => it == interactable);
     }
 }

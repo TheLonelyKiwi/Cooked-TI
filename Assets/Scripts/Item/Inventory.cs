@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
     public bool IsNotFull() => items.Count < _maxItemCapacity;
     public bool IsEmpty() => items.Count == _maxItemCapacity;
     public bool HasItems() => items.Count > 0;
-    public Item LastItem() => items.Last();
+    public Item LastItem() => items.LastOrDefault();
 
     public bool TryAddItem(Item item, out Coroutine moveRoutine)
     {
